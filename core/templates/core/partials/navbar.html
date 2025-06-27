@@ -1,0 +1,59 @@
+{% load cropping %}
+{% load static %}
+
+{% if user.is_authenticated %}
+<style>
+  nav {
+    background-color: darkblue !important;  /* Dark blue navbar background */
+  }
+
+  nav .nav-wrapper,
+  nav .menu-nav-container,
+  nav .menu-container {
+    background-color: transparent;  /* Inner containers stay transparent */
+  }
+
+  nav .grey-text,
+  nav a,
+  nav i,
+  nav span {
+    color: white !important;  /* Make text/icons white for contrast */
+  }
+
+  nav img.circle {
+    border: 2px solid white;  /* Optional: white border for profile image */
+  }
+</style>
+
+<nav>
+  <div class="nav-wrapper">
+    <div class="menu-nav-container">
+      <div class="nav-bread">
+        <!-- You can add breadcrumbs here if needed -->
+      </div>
+      <div class="menu-container">
+        <div class="profile-image-box">
+          {% if user.profile.picture %}
+          <img src="{% cropped_thumbnail user.profile 'cropping' scale=0.2 %}" class="circle">
+          {% else %}
+          <img src="{% static 'img/profile.png' %}" alt="" class="circle">
+          {% endif %}
+          <span>{{ user.username }}</span>
+        </div>
+        <div class="icons-profile-container">
+          <div class="single-icon-box">
+            <a href="{% url 'users:logout_view' %}">
+              <i class="material-icons">power_settings_new</i>
+              <span class="profile-icon-text">Log Out</span>
+            </a>
+          </div>
+          <!-- <div class="single-icon-box">
+            <i class="material-icons">settings</i>
+            <span class="profile-icon-text">Settings</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endif %}

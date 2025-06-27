@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  body {
+    background: url("{% static 'profile_detail/images/log3.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.2);  /* translucent white */
+    backdrop-filter: blur(2px);                 /* actual blur */
+    -webkit-backdrop-filter: blur(5px);         /* Safari support */
+    border-radius: 12px;
+    {% comment %} padding: 20px; {% endcomment %}
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    {% comment %} max-width: 450px; {% endcomment %}
+    {% comment %} margin: auto; {% endcomment %}
+     margin top: 10px;
+  }
+
+
+   /* Customize label color and font */
+  .input-field label {
+    color:rgb(231, 19, 19) !important;
+    {% comment %} font-weight: bold; {% endcomment %}
+    font-size: 16px;
+  }
+
+  /* Optional: change the active label (when input is focused or has value) */
+  .input-field input:focus + label {
+    color: #ffeb3b !important;
+  }
+
+</style>
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                <div class="row">
+                    <div class="col s12">
+                        Login
+                    </div>
+                </div>
+            </div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    
+                    {% if form.non_field_errors %}
+                    <div class="col s12 red white-text">
+                        {{form.non_field_errors}}
+                    </div>
+                    {% endif %}
+                        
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input id="first_name" type="text" name="username" class="validate">
+                        <label for="first_name">Username</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="last_name" type="password" class="validate" name="password">
+                        <label for="last_name">Password</label>
+                    </div>
+                    <div class="col s12">
+                        <button class="waves-effect waves-light btn" type="submit">
+                        <i class="material-icons left">login</i>Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
