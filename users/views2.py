@@ -990,9 +990,10 @@ def export_all_applicants_to_mis(profiles):
 
     return workbook
 
-def export_mis_report(request):
+def export_mis_report(request,pk):
     # Fetch applicant data (adjust query as needed)
     profiles = Applicant.objects.all()
+    profiles=Application.objects.get(pk=pk)
 
     # Generate the workbook
     workbook = export_all_applicants_to_mis(profiles)
